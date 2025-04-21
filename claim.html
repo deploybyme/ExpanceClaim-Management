@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootstrap Dashboard - Claim</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    .nav-link {
+      padding: 0.75rem 1rem;
+      font-weight: 500;
+      color: var(--bs-body-color);
+      transition: background-color 0.2s ease;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+
+    .nav-link:hover {
+      background-color: var(--bs-secondary-bg);
+      border-radius: 5px;
+    }
+
+    .nav-link.active {
+      background-color: var(--bs-primary);
+      color: white !important;
+    }
+
+    .nav-link i {
+      margin-right: 8px;
+    }
+
+    .table-light tr th{
+      min-width: 100px;
+    }
+    
+  </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary px-3 border-bottom">
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#sidebarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">DASHBOARD</a>
+    <div class="ms-auto d-flex align-items-center">
+      <!-- Theme toggle switch -->
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="themeToggle">
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar (Offcanvas for mobile) -->
+  <div class="offcanvas offcanvas-start bg-body-tertiary" tabindex="-1" id="sidebarMenu">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <ul class="nav flex-column m-2">
+        <li class="nav-item">
+          <a class="nav-link active" href="./claim.html">
+            <i class="bi bi-ui-checks-grid"></i> Claims
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./approver.html">
+            <i class="bi bi-check2-square"></i> Claims Approve
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="container-fluid flex-grow-1">
+    <div class="row">
+      <!-- Sidebar for desktop -->
+      <nav class="col-md-3 col-lg-3 d-none d-md-block bg-body-tertiary sidebar border-end"
+        style="height: 100vh;width: 250px;">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column m-2">
+            <li class="nav-item">
+              <a class="nav-link active" href="./claim.html">
+                <i class="bi bi-ui-checks-grid"></i> Claims
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./approver.html">
+                <i class="bi bi-check2-square"></i> Claims Approve
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main class="col-md-7 col-lg-8 px-md-4 py-4 flex-grow-1">
+
+        <div class="d-flex justify-content-end">
+          <!-- Button to open the modal -->
+          <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#claimModal">
+            Add New Claim
+          </button>
+        </div>
+
+<!-- Modal -->
+<div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="claimModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="claimModalLabel">New Expense Claim</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Claim Form -->
+        <form id="claimForm">
+
+          <div class="mb-3">
+            <label for="jobSelect" class="form-label">Select Job</label>
+            <select class="form-select" id="jobSelect" required>
+              <option value="">-- Select a job --</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="claimDate" class="form-label">Claim Date</label>
+            <input type="date" class="form-control" id="claimDate" required>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="claimBreakfast">
+            <label class="form-check-label" for="claimBreakfast">Breakfast</label>
+          </div>
+          <div class="mb-3" id="breakfastDiv" style="display:none;">
+            <label for="breakfast" class="form-label">Breakfast Amount</label>
+            <input type="number" class="form-control" id="breakfast" placeholder="Enter breakfast amount">
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="claimLunch">
+            <label class="form-check-label" for="claimLunch">Lunch</label>
+          </div>
+          <div class="mb-3" id="lunchDiv" style="display:none;">
+            <label for="lunch" class="form-label">Lunch Amount</label>
+            <input type="number" class="form-control" id="lunch" placeholder="Enter lunch amount">
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="claimDinner">
+            <label class="form-check-label" for="claimDinner">Dinner</label>
+          </div>
+          <div class="mb-3" id="dinnerDiv" style="display:none;">
+            <label for="dinner" class="form-label">Dinner Amount</label>
+            <input type="number" class="form-control" id="dinner" placeholder="Enter dinner amount">
+          </div>
+
+          <div class="modal-footer px-0">
+            <button type="submit" class="btn btn-primary">Submit Claim</button>
+          </div>
+
+        </form>
+        <div id="claimStatus" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h1 class="h2">Claim History</h1>
+
+<!-- Claim History Table -->
+<div id="claimHistoryTable" class="table-responsive">
+  <table class="table table-bordered table-striped align-middle w-100">
+    <thead class="table-light">
+      <tr>
+        <th>Claim ID</th>
+        <th>Job</th>
+        <th>Date</th>
+        <th>Breakfast</th>
+        <th>Lunch</th>
+        <th>Dinner</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="claimHistoryBody">
+      <!-- Populated by JS -->
+    </tbody>
+  </table>
+</div>
+
+
+      </main>
+    </div>
+  </div>
+
+<!-- Welcome Modal -->
+<div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-start">
+      <div class="modal-header">
+        <h5 class="modal-title" id="welcomeModalLabel">Welcome!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ol>
+          <li>Data displayed is pre-loaded Data, you can Add or Modify data too.</li>
+          <li>I merged Staff Conveyance Claim request page and ImprestMaster Approver Page for demo purpose.</li>
+          <li>Dark mode can fluctuate table background color, please avoid it.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary text-center py-3 mt-auto border-top">
+    <span>&copy; 2025 Faizan Mirza</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/togglerAtDashboard.js"></script>
+  <script src="./js/claim.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+      welcomeModal.show();
+    });
+  </script>
+  
+</body>
+
+</html>
